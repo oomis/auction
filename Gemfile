@@ -51,7 +51,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+#gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'administrate', github: 'excid3/administrate', branch: 'jumpstart'
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
@@ -69,3 +69,5 @@ gem 'omniauth-twitter', '~> 1.4'
 gem 'sidekiq', '~> 5.2', '>= 5.2.5'
 gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
 gem 'whenever', require: false
+gem 'cancancan'
+gem 'carrierwave', '~> 2.0'

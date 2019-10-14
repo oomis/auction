@@ -1,0 +1,59 @@
+<div class="page-header">
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= @auction.title %></h5>
+    <p class="card-text"><%= @auction.title %></p>
+    <p class="card-text"><%= @auction.end_date %></p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <p class="card-text"><small class="text-muted"><%= @auction.user.name %></small></p>
+  </div>
+  <img src="<%= @auction.image %>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><%= @auction.title %></h5>
+    <p class="card-text"><%= @auction.title %></p>
+    <p class="card-text"><%= @auction.end_date %></p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <p class="card-text"><small class="text-muted"><%= @auction.user.name %></small></p>
+  </div>
+</div>
+
+
+
+
+
+<% if current_user %>
+  <%= form_with model: [@auction, @bid] do |f|%>
+    <%= f.text_field :amount%>
+    <%= f.submit "bid"%>
+  <% end %>
+<% else %>
+  <p>You need to login before you can bid</p>
+<% end %>
+
+<hr>
+
+<h3>Highest bids</h3>
+<div id="bid_pane">
+  <% @bids.limit(1).each do |bid|%>
+    <%= render 'bids/highest_bids', bid: bid %>
+  <% end %>
+</div>
+
+<!-- <hr>
+<h3>Your current bids</h3>
+<div id="bid_pane">
+  <%# @auction.bids.curren.each do |bid|%>
+    <%#= render 'bids/highest_bids', bid: bid %>
+  <%# end %>
+</div> -->
+
+<hr>
+
+<div id="bid_pane">
+  <% @bids.each do |bid|%>
+    <%= render 'bids/bid', bid: bid %>
+  <% end %>
+</div>
+
+<hr>
+<p><%= pluralize(@auction.bids.count, 'Bids')%></p>
