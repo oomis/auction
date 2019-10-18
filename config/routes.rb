@@ -2,9 +2,12 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  get 'auctions_imports/new'
+  get 'auctions_imports/create'
   resources :auctions do
     post 'bids', to: 'bids#create'
   end
+  resources :auctions_imports, only: [:new, :create]
 
   namespace :admin do
     resources :users

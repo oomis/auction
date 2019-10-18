@@ -1,0 +1,37 @@
+#wb = xlsx_package.workbook
+#
+#wb.add_worksheet(name: "Auctions") do |sheet|
+#  # Create the header row
+#  sheet.add_row ["Auction Title", "Desc", "Starting Price", "End Date", "User", "Image", "Published At", "Draft"]
+#  # Create entries for each item
+#  @auctions.each do |auction|
+#    sheet.add_row [auction.title, auction.desc, auction.starting_price, auction.end_date, auction.user.name, auction.image, auction.published_at, auction.draft]
+#  end
+#end
+
+
+
+
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  project_heading = style.add_style(b: true, sz: 14)
+  heading = style.add_style(b: true)
+
+  wb.add_worksheet(name: "Auctions") do |sheet|
+    # Add a title row
+    sheet.add_row ["Inventory Auction"], style: project_heading
+    # Add the date this was downloaded
+    sheet.add_row ["Downloaded at", Time.now.strftime("%b %-d, %Y")]
+    # Add a blank row
+    sheet.add_row []
+    # Create the header row
+    sheet.add_row ["ID", "Auction Title", "Desc", "Starting Price", "End Date", "User", "Image", "Published At", "Draft"], style: heading
+    # Create the database reference row
+    sheet.add_row ["id", "Auction Title", "Desc", "Starting Price", "End Date", "User", "Image", "Published At", "Draft"], style: heading
+    # Create entries for each auction
+    @auctions.each do |auction|
+      sheet.add_row [auction.id, auction.title, auction.desc, auction.starting_price, auction.end_date, auction.user.name, auction.image, auction.published_at, auction.draft]
+    end
+  end
+end

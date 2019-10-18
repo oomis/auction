@@ -71,3 +71,10 @@ gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
 gem 'whenever', require: false
 gem 'cancancan'
 gem 'carrierwave', '~> 2.0'
+gem 'omniauth-google-oauth2'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'rubyzip'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'
+gem "roo", "~> 2.8.0"
+gem 'whenever', require: false

@@ -1,12 +1,29 @@
 class AuctionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_auction, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+  # auctionJob.perform_later auctions
+  # auctionjob.perform_async(1, 2, 3)
 
   # GET /auctions
   # GET /auctions.json
   def index
     @auctions = Auction.all.order('created_at DESC')
+    # @auctions = Auction.not_published
+    # @auctions = Auction.published
+    # @auctions = Auction.published
+    respond_to do |format|
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename='Auctions.xlsx'"
+      }
+      format.html { render :index }
+      # format.html
+      format.csv { send_data @auctions.to_csv }
+    end
   end
+
 
   # GET /auctions/1
   # GET /auctions/1.json
@@ -73,6 +90,6 @@ class AuctionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def auction_params
-      params.require(:auction).permit(:title, :desc, :starting_price, :end_date, :user_id, :image)
+      params.require(:auction).permit(:title, :desc, :starting_price, :end_date, :user_id, :image, :published_at)
     end
 end

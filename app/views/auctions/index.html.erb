@@ -1,5 +1,8 @@
-
-
+<%#= link_to 'Download as Excel', auctions_path(format: :xlsx) %>
+<% if current_user.admin%>
+  <%= link_to "Download as CSV", auctions_path(format: "csv") %>
+  <%= link_to 'Upload from Excel', new_auctions_import_path %>
+<% end %>
 
 <div class="row">
   <div class="col-sm-6">
@@ -16,22 +19,25 @@
 </div>
 
 
+
+
 <div class="card-group">
   <% @auctions.each do |auction| %>
     <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
-      <div class="card">
-        <img src="<%= auction.image %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%=link_to auction.title, auction %></h5>
-          <p class="card-text"><%= auction.desc.truncate(20) %></p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
-        </div>
-      </div>
+      <div class="col-lg-3 col-sm-6 my-3"><div class="card">
+          <img src="<%= auction.image %>" class="card-img-top" alt="...">
+          <div class="card-body">
+              <h5 class="card-title"><%=link_to auction.title, auction %></h5>
+              <p class="card-text"><%= auction.desc.truncate(20) %></p>
+          </div>
+          <div class="card-footer">
+              <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
+          </div>
+      </div></div>
     <% end %>
   <% end %>
 </div>
+
 
 
 
