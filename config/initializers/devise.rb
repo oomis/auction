@@ -262,11 +262,13 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   env_creds = Rails.application.credentials[Rails.env.to_sym] || {}
-    %i{ facebook twitter github }.each do |provider|
+    %i{ facebook twitter github google_oauth2 }.each do |provider|
       if options = env_creds[provider]
         config.omniauth provider, options[:app_id], options[:app_secret], options.fetch(:options, {})
       end
     end
+
+    config.omniauth :google_oauth2, '489680346267-6cardpnb43p66h3g4tnf6ervtrfkmkia.apps.googleusercontent.com', 'FplynhHCZK69hbW1EdemXpzR', {}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
