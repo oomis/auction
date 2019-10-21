@@ -8,7 +8,7 @@ class AuctionsController < ApplicationController
   # GET /auctions
   # GET /auctions.json
   def index
-    @auctions = Auction.all.order('created_at DESC')
+    @auctions = Auction.page(params[:page]).order('created_at DESC')
     # @auctions = Auction.not_published
     # @auctions = Auction.published
     # @auctions = Auction.published
@@ -22,6 +22,9 @@ class AuctionsController < ApplicationController
       # format.html
       format.csv { send_data @auctions.to_csv }
     end
+    # Auction.paginate(page: params[:page], per_page: 30)
+    # Auction.paginate page: params[:page], per_page: 10
+
   end
 
 

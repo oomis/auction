@@ -77,4 +77,5 @@ gem 'rubyzip'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem "roo", "~> 2.8.0"
-gem 'whenever', require: false
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
