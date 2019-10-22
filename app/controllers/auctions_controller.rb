@@ -8,10 +8,10 @@ class AuctionsController < ApplicationController
   # GET /auctions
   # GET /auctions.json
   def index
-    # @auctions = Auction.page(params[:page]).order('created_at DESC')
+    @auctions = Auction.page(params[:page]).order('created_at DESC')
     # @auctions = Auction.not_published
     # @auctions = Auction.published
-    @auctions = Auction.published
+    # @auctions = Auction.published
     respond_to do |format|
       format.xlsx {
         response.headers[
