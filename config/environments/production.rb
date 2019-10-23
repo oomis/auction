@@ -7,17 +7,19 @@ Rails.application.configure do
 
   # config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com' }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "andela-sales.herokuapp.com",
-    authentication: "plain",
-    # enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password:ENV["GMAIL_PASSWORD"]
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => 'smtp.gmail.com',
+    :user_name => "omobolaomiyera@gmail.com",
+    :password => "FuCkYoU321",
+    :authentication => :login,
+    :enable_starttls_auto => true
   }
-# doesn't have to be Heroku, but you get the idea.
-config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com' }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
