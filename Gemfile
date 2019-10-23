@@ -79,3 +79,4 @@ gem 'axlsx_rails'
 gem "roo", "~> 2.8.0"
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'dotenv-rails'
