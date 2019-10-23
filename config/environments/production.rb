@@ -5,7 +5,7 @@ Rails.application.configure do
   config.cache_classes = true
 
 
-  config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com/' }
+  config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
