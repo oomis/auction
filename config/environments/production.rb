@@ -17,7 +17,7 @@ Rails.application.configure do
     password:ENV["GMAIL_PASSWORD"]
   }
 # doesn't have to be Heroku, but you get the idea.
-config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com' }
+# config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com' }
 config.actionmailer.defaulturl_options = { :host => 'andela-sales.herokuapp.com' }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
