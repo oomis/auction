@@ -25,7 +25,15 @@ class Auction < ApplicationRecord
   # }
 
   scope :published, -> {
-    where('published_at <= ? AND end_date >= ?', Time.zone.now, Time.zone.now)
+    where('published_at <= ? AND end_date >= ?', Time.now, Time.now)
+  }
+
+  scope :unpublished, -> {
+    where('published_at > ?', Time.now)
+  }
+
+  scope :ended, -> {
+    where('end_date < ?', Time.now)
   }
   #
   # scope :not_published, -> {

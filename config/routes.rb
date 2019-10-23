@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     root to: "users#index"
   end
+  get '/home', to: 'home#index'
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
     authenticate :user, lambda { |u| u.admin? } do

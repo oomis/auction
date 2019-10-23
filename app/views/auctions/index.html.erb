@@ -1,23 +1,3 @@
-
-  <%#= link_to 'Download as Excel', auctions_path(format: :xlsx) %>
-  <% if current_user.admin%>
-    <%= link_to "Download as CSV", auctions_path(format: "csv") %>
-    <%= link_to 'Upload from Excel', new_auctions_import_path %>
-  <% end %>
-
-  <div class="row">
-    <% if current_user.admin? %>
-      <div class="col-sm-6 text-right">
-      <%= link_to new_auction_path, class: 'btn btn-primary' do %>
-        Add New Auction
-      <% end %>
-      </div>
-    <% else %>
-    <% end %>
-  </div>
-
-
-
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -59,8 +39,47 @@
 
 <div class="container" style="">
 
+  <h1>Current Auctions</h1>
   <div class="card-group">
-    <% @auctions.each do |auction| %>
+    <% @auctions.published.each do |auction| %>
+      <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
+        <div class="col-lg-3 col-sm-6 my-3"><div class="card">
+            <img src="<%= auction.image %>" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><%=link_to auction.title, auction %></h5>
+                <p class="card-text"><%= auction.desc.truncate(20) %></p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
+            </div>
+        </div></div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <h1>Upcoming Auctions</h1>
+
+  <div class="card-group">
+    <% @auctions.unpublished.each do |auction| %>
+      <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
+        <div class="col-lg-3 col-sm-6 my-3"><div class="card">
+            <img src="<%= auction.image %>" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><%=link_to auction.title, auction %></h5>
+                <p class="card-text"><%= auction.desc.truncate(20) %></p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
+            </div>
+        </div></div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <h1>Closed Auction</h1>
+
+  <div class="card-group">
+    <% @auctions.ended.each do |auction| %>
       <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
         <div class="col-lg-3 col-sm-6 my-3"><div class="card">
             <img src="<%= auction.image %>" class="card-img-top" alt="...">

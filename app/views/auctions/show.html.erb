@@ -1,26 +1,35 @@
-<div class="" style="background-color: white">
+<div class="" style="background-color: white; height: 100%">
   <div class="container">
     <div class="row">
-      <div class="col-12 col-md-4 order-md-2">
-
-        <!-- Preheading -->
-        <h2 class="" style="color: blue;">
-          <%= pluralize(@auction.bids.count, 'Bids')%>
-        </h2>
-
+      <div class="col-12 col-md-4 order-md-2" style="margin-top:13px;">
         <!-- Heading -->
         <h3 class="mb-4">
           <%= @auction.title %>
         </h3>
 
         <h3 class="mb-4">
-          <%= @auction.starting_price %>
+          Base Price: #<%= @auction.starting_price %>
         </h3>
 
         <!-- Text -->
         <p class="mb-5 text-muted">
           <%= @auction.desc %>
         </p>
+
+        <% if @auction.published_at<=Time.now && @auction.end_date>=Time.now %>
+          <%= form_with model: [@auction, @bid] do |f|%>
+            <div class="input-group mb-3">
+              <%= f.text_field :amount, class: 'form-control', placeholder: '900000.00'%>
+              <div class="input-group-append">
+                <%= f.submit "bid", class: 'btn btn-primary'%>
+              </div>
+            </div>
+          <% end %>
+        <% elsif @auction.published_at>Time.now %>
+          <p style="color: red;"><i>This bid has not started, it would start by <%= @auction.published_at.strftime("%I:%M %P") %></i></p>
+        <% elsif @auction.end_date<Time.now %>
+          <p style="color: red;"><i>This bid ended by <%= @auction.published_at.strftime("%I:%M %P") %></i></p>
+        <% end %>
 
         <h3>Highest bider</h3>
         <div id="bid_pane">
@@ -36,11 +45,11 @@
 
         <!-- Nav -->
         <nav class="nav nav-tabs mb-5">
-          <a href="#bids" class="nav-item nav-link active" data-toggle="tab">
-            Place Bid
+          <a href="#terms" class="nav-item nav-link active" data-toggle="tab">
+            Terms and Conditions
           </a>
-          <a href="#desc" class="nav-item nav-link" data-toggle="tab">
-            All Bids
+          <a href="#allbids" class="nav-item nav-link" data-toggle="tab">
+            All Bids (<%= @auction.bids.count %>)
           </a>
           <a href="#policy" class="nav-item nav-link" data-toggle="tab">
             Description
@@ -49,36 +58,24 @@
 
         <!-- Content -->
         <div class="tab-content">
-          <div class="tab-pane fade show active" id="bids">
-
-
-
-
-
-            <% if current_user %>
-              <%= form_with model: [@auction, @bid] do |f|%>
-                <div class="input-group mb-3">
-                  <%= f.text_field :amount, calss: 'form-control'%>
-                  <!-- <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2"> -->
-                  <div class="input-group-append">
-                    <%= f.submit "bid", class: 'btn btn-outline-secondary'%>
-                    <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button> -->
-                  </div>
-                </div>
-
-
-              <% end %>
-            <% else %>
-              <p>You need to login before you can bid</p>
-            <% end %>
+          <!-- place bid -->
+          <div class="tab-pane fade show active" id="terms">
+            <p>This will be for privacy and policy blaa blaa blaa</p>
           </div>
-          <div class="tab-pane fade" id="desc">
+          <!-- allbids -->
+          <div class="tab-pane fade" id="allbids">
             <div id="bid_pane">
               <% @bids.each do |bid|%>
                 <%= render 'bids/bid', bid: bid %>
+                <br>
               <% end %>
+              <!-- Preheading -->
+              <p class="" style="color: blue;">
+                <%= pluralize(@auction.bids.count, 'Bids')%>
+              </p>
             </div>
           </div>
+          <!-- policy -->
           <div class="tab-pane fade" id="policy">
               <%= @auction.desc %>
           </div>
