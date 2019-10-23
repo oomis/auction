@@ -18,6 +18,7 @@ Rails.application.configure do
   }
 # doesn't have to be Heroku, but you get the idea.
 config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com' }
+config.actionmailer.defaulturl_options = { :host => 'andela-sales.herokuapp.com' }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
