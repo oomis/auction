@@ -5,7 +5,7 @@ Rails.application.configure do
   config.cache_classes = true
 
 
-  config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com/' }
+  # config.action_mailer.default_url_options = { :host => 'andela-sales.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
@@ -15,8 +15,8 @@ Rails.application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     :domain => 'smtp.gmail.com',
-    :user_name => "damilola.omiyera@andela.com",
-    :password => "FuCkYoU987654321",
+    :user_name => "omobolaomiyera@gmail.com",
+    :password => "FuCkYoU321",
     :authentication => :login,
     :enable_starttls_auto => true
   }
