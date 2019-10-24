@@ -268,7 +268,8 @@ Devise.setup do |config|
       end
     end
 
-    config.omniauth :google_oauth2, '489680346267-6cardpnb43p66h3g4tnf6ervtrfkmkia.apps.googleusercontent.com', 'FplynhHCZK69hbW1EdemXpzR', {}
+    config.omniauth :google_oauth2, '489680346267-6cardpnb43p66h3g4tnf6ervtrfkmkia.apps.googleusercontent.com', 'FplynhHCZK69hbW1EdemXpzR', {hd: 'andela.com'}
+    # config.omniauth :google_oauth2, 'identifier', 'key', {hd: 'yourdomain.com'}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
