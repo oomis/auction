@@ -268,7 +268,7 @@ Devise.setup do |config|
       end
     end
 
-    config.omniauth :google_oauth2, '489680346267-6cardpnb43p66h3g4tnf6ervtrfkmkia.apps.googleusercontent.com', 'FplynhHCZK69hbW1EdemXpzR', {hd: 'andela.com' 'omobolaomiyera@gmail.com'}
+    config.omniauth :google_oauth2, '489680346267-6cardpnb43p66h3g4tnf6ervtrfkmkia.apps.googleusercontent.com', 'FplynhHCZK69hbW1EdemXpzR', {hd: 'andela.com'}
     # config.omniauth :google_oauth2, 'identifier', 'key', {hd: 'yourdomain.com'}
 
   # ==> Warden configuration
