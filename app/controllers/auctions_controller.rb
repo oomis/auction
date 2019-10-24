@@ -8,8 +8,8 @@ class AuctionsController < ApplicationController
   # GET /auctions
   # GET /auctions.json
   def index
-    @auctions = Auction.page(params[:page]).order('created_at DESC')
-    # @auctions = Auction.not_published
+    @auctions = Auction.paginate(page: params[:page], per_page: 12).order('created_at DESC')
+    # @auctions = Auction.page(params[:page]).order('created_at DESC')
     # @auctions = Auction.published
     # @auctions = Auction.published
     respond_to do |format|
