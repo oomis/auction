@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_10_15_062006) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
     t.string "announcement_type"
@@ -29,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_062006) do
     t.text "desc"
     t.float "starting_price"
     t.datetime "end_date"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -40,8 +37,8 @@ ActiveRecord::Schema.define(version: 2019_10_15_062006) do
 
   create_table "bids", force: :cascade do |t|
     t.float "amount"
-    t.bigint "user_id", null: false
-    t.bigint "auction_id", null: false
+    t.integer "user_id", null: false
+    t.integer "auction_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["auction_id"], name: "index_bids_on_auction_id"
@@ -71,7 +68,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_062006) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "provider"
     t.string "uid"
     t.string "access_token"

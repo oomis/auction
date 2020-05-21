@@ -2,6 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-4 order-md-2" style="margin-top:13px;">
+        <% if current_user.admin? %>
+          <%= link_to edit_auction_path(@auction), class: 'btn btn-primary' do %>
+            Edit
+          <% end %>
+        <% end %>
         <!-- Heading -->
         <h3 class="mb-4">
           <%= @auction.title %>
@@ -31,7 +36,7 @@
           <p style="color: red;"><i>This bid ended by <%= @auction.published_at.strftime("%I:%M %P") %></i></p>
         <% end %>
 
-        <h3>Highest bider</h3>
+        <h3>Highest Bider</h3>
         <div id="bid_pane">
           <% @bids.limit(1).each do |bid|%>
             <%= render 'bids/highest_bids', bid: bid %>

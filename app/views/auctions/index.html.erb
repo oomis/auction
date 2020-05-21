@@ -37,76 +37,115 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
-<div class="container" style="">
-
-  <div class="">
-    <h1 style="text-align: center;">Current Auctions</h1>
-    <div class="card-group">
-      <% @auctions.published.each do |auction| %>
-        <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
-          <div class="col-lg-3 col-sm-6 my-3"><div class="card">
-              <img src="<%= auction.image %>" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title"><%=link_to auction.title, auction %></h5>
-                  <p class="card-text"><%= auction.desc.truncate(20) %></p>
-              </div>
-              <div class="card-footer">
-                  <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
-              </div>
-          </div></div>
-        <% end %>
-      <% end %>
-    </div>
+  
+  <div class="card text-center">
+  <div class="card-header">
+    Featured
   </div>
-<hr>
-  <div class="">
-    <h1 style="text-align: center;">Upcoming Auctions</h1>
-
-    <div class="card-group">
-      <% @auctions.unpublished.each do |auction| %>
-        <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
-          <div class="col-lg-3 col-sm-6 my-3"><div class="card">
-              <img src="<%= auction.image %>" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title"><%=link_to auction.title, auction %></h5>
-                  <p class="card-text"><%= auction.desc.truncate(20) %></p>
-              </div>
-              <div class="card-footer">
-                  <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
-              </div>
-          </div></div>
-        <% end %>
-      <% end %>
-    </div>
+  <div class="card-body">
+    <!--<h5 class="card-title">Special title treatment</h5>-->
+    <p class="card-text">We have <%= pluralize(@auctions.published.count, 'auction')%> currently ongoing and <%= pluralize(@auctions.unpublished.count, 'coming soon')%>.</p>
+    <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
   </div>
-<hr>
-  <div class="">
-    <h1 style="text-align: center;">Closed Auction</h1>
-
-    <div class="card-group">
-      <% @auctions.ended.each do |auction| %>
-        <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
-          <div class="col-lg-3 col-sm-6 my-3"><div class="card">
-              <img src="<%= auction.image %>" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title"><%=link_to auction.title, auction %></h5>
-                  <p class="card-text"><%= auction.desc.truncate(20) %></p>
-              </div>
-              <div class="card-footer">
-                  <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
-              </div>
-          </div></div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-<%#= will_paginate @auctions %>
-<%#= will_paginate @auctions , renderer: RemoteLinkPagination::LinkRenderer %>
-<%#= will_paginate @auctions, renderer: BootstrapPagination::Rails %>
-<%= will_paginate @auctions, :renderer => BootstrapPagination::Rails %>
-
-
+  <!--<div class="card-footer text-muted">-->
+  <!--  2 days ago-->
+  <!--</div>-->
 </div>
+
+  <div class="container" style="">
+  
+    <div class="col-12 col-md-12 order-md-1">
+  
+          <!-- Nav -->
+          <nav class="nav nav-tabs mb-5">
+            <a href="#ongoing" class="nav-item nav-link active" data-toggle="tab">
+              <%= pluralize(@auctions.published.count, 'Ongoing Auctions')%>
+            </a>
+            <a href="#upcoming" class="nav-item nav-link" data-toggle="tab">
+              <%= pluralize(@auctions.unpublished.count, 'Upcoming Auctions')%>
+            </a>
+            <a href="#closed" class="nav-item nav-link" data-toggle="tab">
+              <%= pluralize(@auctions.ended.count, 'Closed Auctions')%>
+            </a>
+          </nav>
+  
+          <!-- Content -->
+          <div class="tab-content">
+            <!-- place bid -->
+            <div class="tab-pane fade show active" id="ongoing">
+              <div class="">
+                <div class="card-group">
+                  <% @auctions.published.each do |auction| %>
+                    <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
+                      <div class="col-lg-3 col-sm-6 my-3"><div class="card">
+                          <img src="<%= auction.image %>" class="card-img-top" alt="...">
+                          <div class="card-body">
+                              <h5 class="card-title"><%=link_to auction.title, auction %></h5>
+                              <p class="card-text"><%= auction.desc.truncate(20) %></p>
+                          </div>
+                          <div class="card-footer">
+                              <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
+                          </div>
+                      </div></div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <!-- allbids -->
+            <div class="tab-pane fade" id="upcoming">
+              <div class="">
+                <div class="card-group">
+                  <% @auctions.unpublished.each do |auction| %>
+                    <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
+                      <div class="col-lg-3 col-sm-6 my-3"><div class="card">
+                          <img src="<%= auction.image %>" class="card-img-top" alt="...">
+                          <div class="card-body">
+                              <h5 class="card-title"><%=link_to auction.title, auction %></h5>
+                              <p class="card-text"><%= auction.desc.truncate(20) %></p>
+                          </div>
+                          <div class="card-footer">
+                              <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
+                          </div>
+                      </div></div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <!-- policy -->
+            <div class="tab-pane fade" id="closed">
+              <div class="">
+                <div class="card-group">
+                  <% @auctions.ended.each do |auction| %>
+                    <%= content_tag :tr, id: dom_id(auction), class: dom_class(auction) do %>
+                      <div class="col-lg-3 col-sm-6 my-3"><div class="card">
+                          <img src="<%= auction.image %>" class="card-img-top" alt="...">
+                          <div class="card-body">
+                              <h5 class="card-title"><%=link_to auction.title, auction %></h5>
+                              <p class="card-text"><%= auction.desc.truncate(20) %></p>
+                          </div>
+                          <div class="card-footer">
+                              <small class="text-muted"><%= "posted " + time_ago_in_words(auction.created_at) + " ago" %></small>
+                          </div>
+                      </div></div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+        
+        
+    
+  <%#= will_paginate @auctions %>
+  <%#= will_paginate @auctions , renderer: RemoteLinkPagination::LinkRenderer %>
+  <%#= will_paginate @auctions, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @auctions, :renderer => BootstrapPagination::Rails %>
+  
+  
+  </div>
 
 </div>

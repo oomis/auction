@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -72,5 +72,6 @@ Rails.application.configure do
     user_name: ENV["GMAIL_USERNAME"],
     password:ENV["GMAIL_PASSWORD"]
   }
-config.action_mailer.default_url_options = { :host => 'localhost:5000' }
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+config.hosts << "8342f8b743074610bd0c08989dee0747.vfs.cloud9.us-east-2.amazonaws.com"
 end

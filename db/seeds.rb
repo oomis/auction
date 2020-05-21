@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-30.times do
+50.times do
   title = Faker::Appliance.equipment
   desc = Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false)
   starting_price = rand(0..50)
