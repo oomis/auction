@@ -22,14 +22,14 @@
         <li class="nav-item"><%= link_to "What's New", announcements_path, class: "nav-link #{unread_announcements(current_user)}" %></li>
         <% if user_signed_in? %>
 
-        <% if current_user.admin? %>
+        <%# if current_user.admin? %>
           <div class="nav-item">
           <%= link_to new_auction_path, class: 'nav-link' do %>
             New Auction
           <% end %>
           </div>
-        <% else %>
-        <% end %>
+        <%# else %>
+        <%# end %>
 
         <li class="nav-item">
           <%= link_to notifications_path, class: "nav-link" do %>

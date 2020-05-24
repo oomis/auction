@@ -2,11 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-4 order-md-2" style="margin-top:13px;">
-        <% if current_user.admin? %>
+        <%# if current_user.admin? %>
+        <% if can? :manage, @auction %>  
           <%= link_to edit_auction_path(@auction), class: 'btn btn-primary' do %>
             Edit
           <% end %>
+          <%= link_to 'Destroy', auction_path(@auction), class: 'btn btn-primary',
+            data: {:confirm => 'Are you sure you want to delete this auction?'}, :method => :delete %>
         <% end %>
+        <%# end %>
         <!-- Heading -->
         <h3 class="mb-4">
           <%= @auction.title %>
