@@ -24,9 +24,14 @@
 
         <%# if current_user.admin? %>
           <div class="nav-item">
-          <%= link_to new_auction_path, class: 'nav-link' do %>
-            New Auction
-          <% end %>
+            <%= link_to new_auction_path, class: 'nav-link' do %>
+              New Auction
+            <% end %>
+          </div>
+          <div class="nav-item">
+            <%= link_to '/mypost', class: 'nav-link' do %>
+              My Auctions
+            <% end %>
           </div>
         <%# else %>
         <%# end %>

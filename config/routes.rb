@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
     root to: "users#index"
   end
+  
+  get '/mypost', to: 'auctions#mypost'
   get '/home', to: 'home#index'
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'

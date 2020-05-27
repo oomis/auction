@@ -24,7 +24,10 @@ class AuctionsController < ApplicationController
     end
     # Auction.paginate(page: params[:page], per_page: 30)
     # Auction.paginate page: params[:page], per_page: 10
-
+  end
+  
+  def mypost
+    @auctions = Auction.paginate(page: params[:page], per_page: 12).order('created_at DESC')
   end
 
 
